@@ -8,3 +8,13 @@ helios-ts/helios-*.tgz
 helios-ts/pkg
 
 .vscode
+
+enclave/gramine/#helios.manifest.template#
+enclave/gramine/enclave.log
+enclave/gramine/helios.manifest
+enclave/gramine/helios.manifest.sgx
+enclave/gramine/helios.sig
+enclave/gramine/seal/checkpoint
+enclave/gramine/trusted/arch_libdir/
+enclave/gramine/trusted/etc/
+enclave/gramine/trusted/gramine/

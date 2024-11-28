@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::net::{IpAddr, SocketAddr};
 use std::{
-    path::PathBuf,
+    path::{PathBuf, Path},
     process::exit,
     str::FromStr,
     sync::{Arc, Mutex},
@@ -10,7 +10,6 @@ use std::{
 use alloy::primitives::hex;
 use alloy::primitives::B256;
 use clap::{Args, Parser, Subcommand};
-use dirs::home_dir;
 use eyre::Result;
 use figment::providers::Serialized;
 use figment::value::Value;
@@ -152,7 +151,7 @@ struct EthereumArgs {
 
 impl EthereumArgs {
     fn make_client(&self) -> EthereumClient<FileDB> {
-        let config_path = home_dir().unwrap().join(".helios/helios.toml");
+        let config_path = Path::new("/seal/").join(".helios/helios.toml");
         let cli_config = self.as_cli_config();
         let config = EthereumConfig::from_file(&config_path, &self.network, &cli_config);
 
@@ -216,7 +215,7 @@ struct OpStackArgs {
 
 impl OpStackArgs {
     fn make_client(&self) -> OpStackClient {
-        let config_path = home_dir().unwrap().join(".helios/helios.toml");
+        let config_path = Path::new("/seal/").join(".helios/helios.toml");
         let cli_provider = self.as_provider();
         let config = OpStackConfig::from_file(&config_path, &self.network, cli_provider);
 

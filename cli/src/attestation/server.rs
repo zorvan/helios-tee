@@ -64,7 +64,7 @@ pub fn create_router(app_state: AppState) -> Router {
         //.allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
         .allow_origin(Any)
         .allow_methods([Method::GET])
-        .allow_credentials(true)
+        .allow_credentials(false)
         .allow_headers([AUTHORIZATION, ACCEPT, CONTENT_TYPE]);
 
     Router::new()
@@ -80,6 +80,6 @@ pub async fn quote_server(client_account: String) {
     let app = create_router(app_state);
 
     tracing::info!("🚀 Quote Server started successfully");
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8765").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }

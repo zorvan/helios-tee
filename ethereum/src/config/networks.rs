@@ -1,11 +1,9 @@
 use std::fmt::Display;
 #[cfg(not(target_arch = "wasm32"))]
-use std::path::PathBuf;
+use std::path::{PathBuf, Path};
 use std::str::FromStr;
 
 use alloy::primitives::{b256, fixed_bytes};
-#[cfg(not(target_arch = "wasm32"))]
-use dirs::home_dir;
 use eyre::Result;
 use serde::{Deserialize, Serialize};
 use strum::EnumIter;
@@ -239,7 +237,5 @@ pub fn holesky() -> BaseConfig {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn data_dir(network: Network) -> PathBuf {
-    home_dir()
-        .unwrap()
-        .join(format!(".helios/data/{}", network))
+    Path::new("/seal/").join(format!(".helios/data/{}", network))
 }
