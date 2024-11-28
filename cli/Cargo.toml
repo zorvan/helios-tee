@@ -23,3 +23,20 @@ ctrlc = "3.2.3"
 helios-core = { path = "../core" }
 helios-ethereum = { path = "../ethereum" }
 helios-opstack = { path = "../opstack" }
+
+axum = "0.7.2"
+reqwest = { version = "0.12", features = ["json"] }
+tower-http = { version = "0.5.0", features = ["cors"] }
+serde = { version = "1.0.214", features = ["derive"] }
+serde_json = "1"
+base64 = "0.21.7"
+anyhow = "1"
+configfs-tsm = "0.0.1"
+rand = "0.8.5"
+ed25519-dalek = {version = "2.1.1", features = ["rand_core", "serde"]}
+hex = "0.4.3"
+
+[features]
+default = ["sgx"]
+sgx = []
+tdx = []

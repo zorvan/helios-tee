@@ -26,9 +26,16 @@ use tracing::{error, info};
 use tracing_subscriber::filter::{EnvFilter, LevelFilter};
 use tracing_subscriber::FmtSubscriber;
 
+pub mod attestation;
+
 #[tokio::main]
 async fn main() -> Result<()> {
     enable_tracer();
+    
+    let account = "tee-helios";
+    let _quote_server_handle = tokio::task::spawn(attestation::server::quote_server(
+        account.to_string(),
+    ));
 
     let cli = Cli::parse();
     match cli.command {

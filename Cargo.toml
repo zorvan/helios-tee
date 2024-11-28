@@ -168,3 +168,8 @@ harness = false
 [[bench]]
 name = "sync"
 harness = false
+
+[features]
+default = ["sgx"]
+sgx = []
+tdx = []
