@@ -1,4 +1,4 @@
-# TEE AI AGENT DEPLOYMENT
+# TEE HELIOS LIGHT CLIENT DEPLOYMENT
 
 ## Update Ubuntu
 
@@ -52,17 +52,14 @@ cp target/debug/helios enclave/gramine/bin/
 
 ## Update the Trusted Files
 
-This will include the current input toml files:
-
-- config.toml
-- prompts.toml
-
 ``` shell
 cd enclave/gramine/trusted
 ./update-trusted.sh
 ```
 
 ## Start the Enclave
+
+The logs will be on gramine/enclave.log
 
 ``` shell
 cd enclave
@@ -92,4 +89,21 @@ There may be multiple enclaves deployed. Choose the right PID.
 ``` shell
 ps aux | grep gramine
 kill -9 <PID>
+```
+
+## Test
+
+To call the RPC : 
+
+``` shell
+curl -X POST \ 
+     -H 'Content-Type: application/json' \
+     -d '{"jsonrpc":"2.0","id":"id","method":"eth_syncing"}' \
+     http://localhost:8545
+```
+To get a quote : 
+
+``` shell
+sudo apt install -y jq
+curl http://localhost:8765/api/quote | jq .
 ```
